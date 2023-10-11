@@ -16,15 +16,16 @@ public class UserController {
     private IUserRepository repository;
 
     @PostMapping("/")
-    public ResponseEntity<UserModel> create(@RequestBody UserModel userModel) {
+    public ResponseEntity<Object> create(@RequestBody UserModel userModel) {
         var user = this.repository.findByUsername(userModel.getUsername());
 
         if (user != null) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existente com este username");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existente com este username");
         }
 
         var userCreated = this.repository.save(userModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
     }
+
 }
