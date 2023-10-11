@@ -12,8 +12,6 @@ public class UserController {
 
     @PostMapping("/")
     public ResponseEntity<UserModel> create(@RequestBody UserModel userModel) {
-        System.out.println(userModel.getName());
-
         return ResponseEntity.ok().body(userModel);
     }
 }
